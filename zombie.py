@@ -5,6 +5,7 @@ import json
 import random
 import datetime
 import time
+import logging
 
 # Do not use this as an example, this is my first ever Python script
 # Tested with Python 3.4.3
@@ -23,7 +24,8 @@ def sendSimpleMessage(chatId, text):
     try:
         data = urllib.parse.urlencode({'chat_id': format(chatId), 'text': text})
         urllib.request.urlopen(url +  'sendMessage', data.encode('utf-8'))
-    except:
+    except Exception as e:
+        logging.warning('Something went wrong when sending a message: ' + str(e))
         return
 
 # get the updates and reply to text messages
@@ -33,7 +35,8 @@ def doBotStuff(updateId):
         response = urllib.request.urlopen(url + 'getUpdates', data.encode('utf-8'))
         reader = codecs.getreader("utf-8")
         data = json.load(reader(response))
-    except:
+    except Exception as e:
+        logging.warning('Something went wrong when fetching updates: ' + str(e))
         return updateId
 
     file = open(logfilename, 'a')
@@ -73,7 +76,8 @@ try:
     file = open(filename, 'rt')
     updateId = int(file.read())
     file.close()
-except:
+except Exception as e:
+    logging.warning('Something went wrong when opening `' + filename + '`, is this your first run? ' + str(e))
     with open(filename, 'w') as file:
         file.write('0')
     updateId = 0
