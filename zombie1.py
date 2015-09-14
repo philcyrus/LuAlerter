@@ -11,7 +11,7 @@ import logging
 # global contstants!
 # token from config.py
 from config import token
-strings = ['Aaarghhh!!!', 'Braaiiinnzzz..', 'Grmbblrr..', 'GRRRRRR...!!', 'Bluuughhrr..']
+strings = ['Please Discuss Further Actions ON THIS ALERT IN DISCUSSIONS CHAT']
 url = 'https://api.telegram.org/bot' + token + '/'
 filename = 'offset.txt' # updateID offset to prevent multiple responses
 logfilename = 'log.txt' # logfile
